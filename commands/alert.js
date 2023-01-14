@@ -2,6 +2,7 @@ import { search } from '../api.js';
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const { hyperlink } = require('discord.js');
+import { getUser, setUser } from '../db.js';
 
 export const NAME = 'alert';
 export const DESCRIPTION = 'Sets an alert for a Carousell search';
