@@ -1,3 +1,5 @@
 Search command: -> /search [query] will bring up a list of all products that match the search query
 Remind command: -> /remind [query] will set up a periodic reminder to ping the user whenever a product matches the search query
+Delete command: -> /delete [query] will remove the reminder matching the query
+
 
