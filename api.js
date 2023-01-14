@@ -55,10 +55,21 @@ const tokens = await getTokens("https://carousell.sg");
 headers['cookie'] = tokens[0];
 headers['csrf-token'] = tokens[1];
 
-export async function search(query, count = 40, filters) {
+async function search(query, count = 40, filters = []) {
     body.query = query;
     body.count = count;
     body.filters = filters;
     const response = await getResponse('https://www.carousell.sg/api-service/filter/cf/4.0/search/', body, headers);
     return (response.data.results || []).map(i => i.listingCard);
+}
+
+export async function searchWithPriceRange(query, count, minprice, maxprice) {
+    const filters = [{rangedFloat: {}, fieldName: "price"}]
+    if (minprice !== undefined){
+        filters[0].rangedFloat.start = {value: minprice.toString()};
+    }
+    if (maxprice !== undefined){
+        filters[0].rangedFloat.end = {value: maxprice.toString()};
+    }
+    return search(query, count, filters);
 }

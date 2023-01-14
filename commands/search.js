@@ -1,4 +1,4 @@
-import { search } from '../api.js';
+import { searchWithPriceRange } from '../api.js';
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const { hyperlink } = require('discord.js');
@@ -42,20 +42,13 @@ export async function run(interaction) {
     const count = interaction.options.get('count')?.value ?? 1;
     const minprice = interaction.options.get('minprice')?.value;
     const maxprice = interaction.options.get('maxprice')?.value;
-    const filters = [{rangedFloat: {}, fieldName: "price"}]
-    if(minprice !== undefined){
-        filters[0].rangedFloat.start = {value: minprice.toString()};
-    }
-    if(maxprice !== undefined){
-        filters[0].rangedFloat.end = {value: maxprice.toString()};
-    }
-    console.log(`search ${query} count ${count}`);
-    const results = await search(query, count, filters);
-    const now = Math.round(Date.now() / 1000);
+    const fullQuery = `${query}${minprice === undefined ? '' : `, with minprice: ${minprice}`}${maxprice === undefined ? '' : `, with maxprice: ${maxprice}`}`;
+    console.log(`search ${fullQuery}, count ${count}`);
+    const results = await searchWithPriceRange(query, count, minprice, maxprice);
     let s = "";
     for (let i = 0; i < results.length; ++i) {
         const posted = results[i].aboveFold[0].timestampContent.seconds.low;
         s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id) + ` (<t:${posted}:R>)`;
     }
-    return `Search: ${query}${minprice === undefined ? '' :  `, with minprice: ${minprice}`}${maxprice === undefined ? '' :  `, with maxprice: ${maxprice}`}\n${s ? 'Results' + s : 'No results found'}`;
+    return `Search: ${fullQuery}\n${s ? 'Results' + s : 'No results found'}`;
 }
