@@ -1,7 +1,4 @@
 import { search } from '../api.js';
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const { hyperlink } = require('discord.js');
 import { getUser } from '../db.js';
 
 export const NAME = 'alert';
@@ -18,7 +15,6 @@ export const OPTIONS = [
 export async function run(interaction) {
     const user = interaction.user;
     const query = interaction.options.get('name')?.value;
-    const filters = interaction.options.get('filters')?.value;
     if (query in getUser(user.id)) {
         return `You already set an alert for ${query}`;
     }
@@ -40,9 +36,9 @@ export async function run(interaction) {
             }
         }
         lastResultTime = Math.max(lastResultTime, latestResultTime);
-        const resultsString = newResults.map(result => hyperlink(result.title, "https://www.carousell.sg/p/" + result.id)).join('\n')
+        const resultsString = newResults.map(result => `https://www.carousell.sg/p/${result.id} - ${result.title} (<t:${result.aboveFold[0].timestampContent.seconds.low}:R>)`).join('\n');
         if (newResults.length > 0) {
-            interaction.channel.send(`${user}\nSearch: ${query}, with filters: ${filters}\nResults: ${resultsString}`);
+            interaction.channel.send(`${user}\nSearch: ${query}\nResults:\n${resultsString}`);
         } else {
             console.log(`No new results for ${query}`);
         }
