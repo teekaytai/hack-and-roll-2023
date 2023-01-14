@@ -57,5 +57,5 @@ export async function run(interaction) {
         const posted = results[i].aboveFold[0].timestampContent.seconds.low;
         s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id) + ` (<t:${posted}:R>)`;
     }
-    return `Search: ${query}${minprice === undefined ? '' :  `, with minprice: ${minprice}`}${maxprice === undefined ? '' :  `, with maxprice: ${maxprice}`}\nResults: ${s}`;
+    return `Search: ${query}${minprice === undefined ? '' :  `, with minprice: ${minprice}`}${maxprice === undefined ? '' :  `, with maxprice: ${maxprice}`}\n${s ? 'Results' + s : 'No results found'}`;
 }
