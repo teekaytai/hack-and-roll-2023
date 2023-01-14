@@ -1,7 +1,7 @@
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
-const { REST, Routes, Client, GatewayIntentBits } = require('discord.js');
+const { REST, Routes, Client, GatewayIntentBits, hyperlink } = require('discord.js');
 
 const config = require('./config.json');
 
@@ -24,6 +24,14 @@ const commands = [
                 name: 'name',
                 description: 'Name of the item',
                 required: true
+            },
+            {
+                type: 4,
+                name: 'count',
+                description: 'Number of results',
+                required: false,
+                min_value: 1,
+                max_value: 5
             },
             {
                 type: 3,
@@ -60,11 +68,15 @@ client.on('interactionCreate', async interaction => {
         await interaction.reply('Pong!');
     } else if (interaction.commandName === 'search') {
         const query = interaction.options.get('name')?.value;
+        const count = interaction.options.get('count')?.value ?? 1;
         const filters = interaction.options.get('filters')?.value;
-        console.log(`search ${query}`);
-        const results = await search(query);
-        console.log(results);
-        await interaction.reply(`Search: ${query}, with filters: ${filters}\nTop result: ${results[0]}`);
+        console.log(`search ${query} count ${count}`);
+        const results = await search(query, count);
+        let s = "";
+        for (let i = 0; i < results.length; ++i) {
+            s += '\n' + hyperlink(results[i][3], "https://www.carousell.sg/p/" + results[i][0]);
+        }
+        await interaction.reply(`Search: ${query}, with filters: ${filters}\nResults: ${s}`);
     }
 });
 
