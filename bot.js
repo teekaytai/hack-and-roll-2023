@@ -73,8 +73,11 @@ client.on('interactionCreate', async interaction => {
         console.log(`search ${query} count ${count}`);
         const results = await search(query, count);
         let s = "";
+        const now = Math.round(Date.now()/1000);
+
         for (let i = 0; i < results.length; ++i) {
-            s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id);
+            s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id+'\n'+(now-results[i].aboveFold[0].timestampContent.seconds.low)+" seconds ago");
+            console.log(now-results[i].aboveFold[0].timestampContent.seconds.low);       
         }
         await interaction.reply(`Search: ${query}, with filters: ${filters}\nResults: ${s}`);
     }
