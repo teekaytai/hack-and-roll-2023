@@ -41,7 +41,7 @@ export async function run(interaction) {
         console.log(`alert ${fullQuery}`);
         const results = await searchWithPriceRange(query, 40, minprice, maxprice);
         let latestResultTime = 0;
-        const newResults = [];
+        let newResults = [];
         for (let i = 0; i < results.length; ++i) {
             if (newResults.length === 5) {
                 const resultsString = newResults.map(result => `https://www.carousell.sg/p/${result.id} - ${result.title} (<t:${result.aboveFold[0].timestampContent.seconds.low}:R>)`).join('\n');
