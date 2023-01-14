@@ -44,10 +44,10 @@ export async function run(interaction) {
     const maxprice = interaction.options.get('maxprice')?.value;
     const filters = [{rangedFloat: {start: {value: ""}, end: {value: ""}}, fieldName: "price"}]
     if(minprice !== undefined){
-            filters[0].rangedFloat.start.value = minprice.toString();
+            filters[0].rangedFloat = {start: {value: minprice.toString()}};
     }
     if(maxprice !== undefined){
-            filters[0].rangedFloat.end.value = maxprice.toString();
+            filters[0].rangedFloat = {end: {value: maxprice.toString()}};
     }
     console.log(`search ${query} count ${count}`);
     const results = await search(query, count, filters);
@@ -57,5 +57,5 @@ export async function run(interaction) {
         const posted = results[i].aboveFold[0].timestampContent.seconds.low;
         s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id) + ` (<t:${posted}:R>)`;
     }
-    return `Search: ${query}, with minprice: ${minprice} and maxprice: ${maxprice} \nResults: ${s}`;
+    return `Search: ${query}${minprice === undefined ? '' :  `, with minprice: ${minprice}`}${maxprice === undefined ? '' :  `, with maxprice: ${maxprice}`}\nResults: ${s}`;
 }
