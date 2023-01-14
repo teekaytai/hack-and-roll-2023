@@ -1,6 +1,9 @@
 const users = {};
 
 export function getUser(user) {
+    if (!(user in users)) {
+        users[user] = {};
+    }
     return users[user];
 }
 
