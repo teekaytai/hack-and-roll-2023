@@ -23,7 +23,7 @@ export async function run(interaction) {
     const alert = async function () {
         console.log(`alert ${query}`);
         const results = await search(query, 40);
-        let latestResultTime = 0;
+        let latestResultTime = Date.now();
         const newResults = [];
         for (let i = 0; i < results.length; ++i) {
             if (newResults.length == 5) {
