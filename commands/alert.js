@@ -19,7 +19,7 @@ export async function run(interaction) {
     const user = interaction.user;
     const query = interaction.options.get('name')?.value;
     const filters = interaction.options.get('filters')?.value;
-    if (query in getUser(user)) {
+    if (query in getUser(user.id)) {
         return `You already set an alert for ${query}`;
     }
 
@@ -47,6 +47,6 @@ export async function run(interaction) {
             console.log(`No new results for ${query}`);
         }
     }
-    getUser(user)[query] = setInterval(alert, 5000);
+    getUser(user.id)[query] = setInterval(alert, 5000);
     return `Alert set for '${query}'`;
 }
