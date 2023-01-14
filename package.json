@@ -1,0 +1,23 @@
+{
+  "name": "hack-and-roll-2023",
+  "version": "1.0.0",
+  "description": "web scraper for shopping",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teekaytai/hack-and-roll-2023.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/teekaytai/hack-and-roll-2023/issues"
+  },
+  "homepage": "https://github.com/teekaytai/hack-and-roll-2023#readme",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "discord.js": "^14.7.1"
+  }
+}
