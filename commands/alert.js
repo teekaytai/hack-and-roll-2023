@@ -11,30 +11,36 @@ export const OPTIONS = [
         name: 'name',
         description: 'Name of the item',
         required: true
-    },
-    {
-        type: 4,
-        name: 'count',
-        description: 'Number of results',
-        required: false,
-        min_value: 1,
-        max_value: 5
     }
 ]
 
 export async function run(interaction) {
     const query = interaction.options.get('name')?.value;
-    const count = interaction.options.get('count')?.value ?? 1;
     const filters = interaction.options.get('filters')?.value;
+    let lastResultTime = 0;
     const alert = async function () {
         console.log(`alert ${query}`);
-        const results = await search(query, count);
-        let s = "";
+        const results = await search(query, 40);
+        let latestResultTime = 0;
+        const newResults = [];
         for (let i = 0; i < results.length; ++i) {
-            s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id);
+            if (newResults.length == 5) {
+                break;
+            }
+            const timePosted = results[i].aboveFold[0].timestampContent.seconds.low;
+            if (timePosted > lastResultTime) {
+                newResults.push(results[i])
+                latestResultTime = Math.max(latestResultTime, timePosted)
+            }
         }
-        interaction.channel.send(`Search: ${query}, with filters: ${filters}\nResults: ${s}`);
+        lastResultTime = Math.max(lastResultTime, latestResultTime);
+        const resultsString = newResults.map(result => hyperlink(result.title, "https://www.carousell.sg/p/" + result.id)).join('\n')
+        if (newResults.length > 0) {
+            interaction.channel.send(`${interaction.user}\nSearch: ${query}, with filters: ${filters}\nResults: ${resultsString}`);
+        } else {
+            console.log(`No new results for ${query}`);
+        }
     }
     setInterval(alert, 5000);
-    return 'Ok got it';
+    return `Alert set for '${query}'`;
 }
