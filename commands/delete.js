@@ -19,7 +19,8 @@ export async function run(interaction) {
     if (index <= 0 || index > queries.length) {
       return "Index is out of range. Use `list` to view your current alerts."
     }
-    const deletedQuery = alerts[queries[index - 1]];
-    delete alerts[queries[index - 1]]
+    const deletedQuery = queries[index - 1];
+    clearInterval(alerts[queries[index - 1]]);
+    delete alerts[queries[index - 1]];
     return `Successfully deleted alert for '${deletedQuery}'`;
 }
