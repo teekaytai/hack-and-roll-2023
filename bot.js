@@ -74,7 +74,7 @@ client.on('interactionCreate', async interaction => {
         const results = await search(query, count);
         let s = "";
         for (let i = 0; i < results.length; ++i) {
-            s += '\n' + hyperlink(results[i][3], "https://www.carousell.sg/p/" + results[i][0]);
+            s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id);
         }
         await interaction.reply(`Search: ${query}, with filters: ${filters}\nResults: ${s}`);
     }
