@@ -42,12 +42,12 @@ export async function run(interaction) {
     const count = interaction.options.get('count')?.value ?? 1;
     const minprice = interaction.options.get('minprice')?.value;
     const maxprice = interaction.options.get('maxprice')?.value;
-    const filters = [{rangedFloat: {start: {value: ""}, end: {value: ""}}, fieldName: "price"}]
+    const filters = [{rangedFloat: {}, fieldName: "price"}]
     if(minprice !== undefined){
-            filters[0].rangedFloat = {start: {value: minprice.toString()}};
+        filters[0].rangedFloat.start = {value: minprice.toString()};
     }
     if(maxprice !== undefined){
-            filters[0].rangedFloat = {end: {value: maxprice.toString()}};
+        filters[0].rangedFloat.end = {value: maxprice.toString()};
     }
     console.log(`search ${query} count ${count}`);
     const results = await search(query, count, filters);
