@@ -33,7 +33,7 @@ function getData(query, fields) {
 
 const body = {
     "bestMatchEnabled": true,
-    "canChangeKeyword": true,
+    "canChangeKeyword": false,
     "count": 40,
     "countryCode": "SG",
     "countryId": "1880251",
@@ -41,7 +41,8 @@ const body = {
     "includeEducationBanner": true,
     "includeSuggestions": true,
     "locale": "en",
-    "prefill": {},
+    "sortParam": {fieldName: "3"},
+    "prefill": {}
     //"query": "PS5"
 };
 
