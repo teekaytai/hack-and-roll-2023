@@ -1,6 +1,9 @@
-import { REST, Routes } from 'discord.js';
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 
-import config from './config.json' assert { type: 'json' };
+const { REST, Routes } = require('discord.js');
+
+const config = require('./config.json');
 
 const TOKEN = config.TOKEN;
 const CLIENT_ID = config.CLIENT_ID;
