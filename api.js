@@ -55,9 +55,10 @@ const tokens = await getTokens("https://carousell.sg");
 headers['cookie'] = tokens[0];
 headers['csrf-token'] = tokens[1];
 
-export async function search(query, count = 40) {
+export async function search(query, count = 40, filters) {
     body.query = query;
     body.count = count;
+    body.filters = filters;
     const response = await getResponse('https://www.carousell.sg/api-service/filter/cf/4.0/search/', body, headers);
     return response.data.results.map(i => i.listingCard);
 }
