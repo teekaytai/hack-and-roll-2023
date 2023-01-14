@@ -8,11 +8,31 @@ const config = require('./config.json');
 const TOKEN = config.TOKEN;
 const CLIENT_ID = config.CLIENT_ID;
 
+import { search } from './api.js';
+
 const commands = [
     {
         name: 'ping',
         description: 'Replies with Pong!',
     },
+    {
+        name: 'search',
+        description: 'Searches Carousell for item',
+        options: [
+            {
+                type: 3,
+                name: 'name',
+                description: 'Name of the item',
+                required: true
+            },
+            {
+                type: 3,
+                name: 'filters',
+                description: 'Filters?',
+                required: false
+            }
+        ]
+    }
 ];
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
@@ -38,6 +58,13 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'ping') {
         await interaction.reply('Pong!');
+    } else if (interaction.commandName === 'search') {
+        const query = interaction.options.get('name')?.value;
+        const filters = interaction.options.get('filters')?.value;
+        console.log(`search ${query}`);
+        const results = await search(query);
+        console.log(results);
+        await interaction.reply(`Search: ${query}, with filters: ${filters}\nTop result: ${results[0]}`);
     }
 });
 
