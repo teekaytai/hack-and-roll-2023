@@ -1,6 +1,7 @@
 import { NAME as PING_NAME, DESCRIPTION as PING_DESCRIPTION, run as pingRunner } from './commands/ping.js';
 import { NAME as SEARCH_NAME, DESCRIPTION as SEARCH_DESCRIPTION, OPTIONS as SEARCH_OPTIONS, run as searchRunner } from './commands/search.js';
 import { NAME as ALERT_NAME, DESCRIPTION as ALERT_DESCRIPTION, OPTIONS as ALERT_OPTIONS, run as alertRunner } from './commands/alert.js';
+import { NAME as LIST_NAME, DESCRIPTION as LIST_DESCRIPTION, run as listRunner } from './commands/list.js';
 import { NAME as CLEAR_NAME, DESCRIPTION as CLEAR_DESCRIPTION, run as clearRunner } from './commands/clear.js';
 
 export const commands = [
@@ -19,6 +20,10 @@ export const commands = [
         options: ALERT_OPTIONS
     },
     {
+        name: LIST_NAME,
+        description: LIST_DESCRIPTION
+    },
+    {
         name: CLEAR_NAME,
         description: CLEAR_DESCRIPTION
     }
@@ -28,5 +33,6 @@ export const runners = {
     [PING_NAME]: pingRunner,
     [SEARCH_NAME]: searchRunner,
     [ALERT_NAME]: alertRunner,
+    [LIST_NAME]: listRunner,
     [CLEAR_NAME]: clearRunner,
 }
