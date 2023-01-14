@@ -34,11 +34,11 @@ export async function run(interaction) {
     const filters = interaction.options.get('filters')?.value;
     console.log(`search ${query} count ${count}`);
     const results = await search(query, count);
-    const now = Math.round(Date.now()/1000);
+    const now = Math.round(Date.now() / 1000);
     let s = "";
     for (let i = 0; i < results.length; ++i) {
         const posted = results[i].aboveFold[0].timestampContent.seconds.low;
-        s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id + '\n' + (now-posted) + " seconds ago");
+        s += '\n' + hyperlink(results[i].title, "https://www.carousell.sg/p/" + results[i].id) + ` (<t:${posted}:R>)`;
     }
     return `Search: ${query}, with filters: ${filters}\nResults: ${s}`;
 }
