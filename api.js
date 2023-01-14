@@ -60,5 +60,5 @@ export async function search(query, count = 40, filters) {
     body.count = count;
     body.filters = filters;
     const response = await getResponse('https://www.carousell.sg/api-service/filter/cf/4.0/search/', body, headers);
-    return response.data.results.map(i => i.listingCard);
+    return (response.data.results || []).map(i => i.listingCard);
 }
