@@ -3,6 +3,7 @@ import { NAME as SEARCH_NAME, DESCRIPTION as SEARCH_DESCRIPTION, OPTIONS as SEAR
 import { NAME as ALERT_NAME, DESCRIPTION as ALERT_DESCRIPTION, OPTIONS as ALERT_OPTIONS, run as alertRunner } from './commands/alert.js';
 import { NAME as LIST_NAME, DESCRIPTION as LIST_DESCRIPTION, run as listRunner } from './commands/list.js';
 import { NAME as CLEAR_NAME, DESCRIPTION as CLEAR_DESCRIPTION, run as clearRunner } from './commands/clear.js';
+import { NAME as DELETE_NAME, DESCRIPTION as DELETE_DESCRIPTION, OPTIONS as DELETE_OPTIONS, run as deleteRunner } from './commands/delete.js';
 
 export const commands = [
     {
@@ -26,7 +27,12 @@ export const commands = [
     {
         name: CLEAR_NAME,
         description: CLEAR_DESCRIPTION
-    }
+    },
+    {
+        name: DELETE_NAME,
+        description: DELETE_DESCRIPTION,
+        options: DELETE_OPTIONS
+    },
 ];
 
 export const runners = {
@@ -35,4 +41,5 @@ export const runners = {
     [ALERT_NAME]: alertRunner,
     [LIST_NAME]: listRunner,
     [CLEAR_NAME]: clearRunner,
+    [DELETE_NAME]: deleteRunner,
 }
