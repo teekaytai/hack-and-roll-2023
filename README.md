@@ -3,11 +3,12 @@
 ## CAROSTONKS 📈📈📈 
 
 
-## A Discord bot that allows you to track your wanted items to notify you as soon as they go up for sale.
+## A Discord bot that allows you to track your wanted items as soon as they go up for sale.
 
 ## Installation Guide
 
 Add the bot to your server with the link below:
+
 https://discord.com/api/oauth2/authorize?client_id=1063679035252670615&permissions=-1&scope=bot
 
 ## List of commands
