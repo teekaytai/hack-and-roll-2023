@@ -1,35 +1,56 @@
-# hack-and-roll-2023
+![](images/icon.png)
 
-## CAROSTONKS 📈📈📈 
-
+# CAROSTONKS 📈📈📈 
 
 ## A Discord bot that allows you to track your wanted items as soon as they go up for sale.
 
 ## Installation Guide
 
-Add the bot to your server with the link below:
+To run this bot yourself locally, follow the steps below.
 
-https://discord.com/api/oauth2/authorize?client_id=1063679035252670615&permissions=-1&scope=bot
+1. Set up a discord bot on the [Discord Developer Portal](https://discord.com/developers/applications). The bot will need permission to use slash commands, read messages and send messages. Take note of the bot's application id and its secret token.
+
+2. Clone the repo
+
+3. Navigate to the repo and run `npm install`
+
+4. Add a `config.json` file to the root of the folder with the following 2 values:
+```json
+{
+  "CLIENT_ID": "Your bot's application id", 
+  "TOKEN": "Your bot's secret token",
+}
+```
+
+5. Run `npm start`
+
+6. You should now be able to communicate with the bot after adding it to a server!
 
 ## List of commands
 
-### Search
-**/search query, [optional] count, [optional]minprice, [optional]maxprice**
+Note: Parameters in square brackets are optional
 
-Performs a one time search of the requested item with the specified parameters.
+### Search
+`/search query, [count], [minprice], [maxprice]`
+
+Performs a one time search of the requested item within the given price range, returning at most `count` results.
 
 ### Alert
-**/alert query, [optional] minprice, [optional] maxprice**
+`/alert query, [minprice], [maxprice]`
 
-Sets up an alert to notify the user when the requested item(s) with the specified paramters is listed for sale.
+Sets up an alert to notify the user when the requested item(s) within the specified price range is listed for sale.
 
 ### List
-**/list**
+`/list`
 
-List all alerts current set up.
+List all alerts the user currently has set up.
+
+### Clear
+`/clear`
+
+Clears all alerts the user currently has set up. This does not clear alerts set up by other users.
 
 ### Delete
-**/delete index**
+`/delete index`
 
-Deletes the alert represented by the specified index.
-
+Deletes the alert represented by the specified index in the list.
