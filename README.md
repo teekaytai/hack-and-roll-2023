@@ -15,17 +15,21 @@ https://discord.com/api/oauth2/authorize?client_id=1063679035252670615&permissio
 
 ### Search
 /search query, [optional] count, [optional]minprice, [optional]maxprice
+
 Performs a one time search of the requested item with the specified parameters.
 
 ### Alert
 /alert query, [optional] minprice, [optional] maxprice
+
 Sets up an alert to notify the user when the requested item(s) with the specified paramters is listed for sale.
 
 ### List
 /list
+
 List all alerts current set up.
 
 ### Delete
 /delete index
+
 Deletes the alert represented by the specified index.
 
