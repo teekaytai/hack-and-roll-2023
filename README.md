@@ -21,7 +21,7 @@ Performs a one time search of the requested item with the specified parameters.
 /alert query, [optional] minprice, [optional] maxprice
 Sets up an alert to notify the user when the requested item(s) with the specified paramters is listed for sale.
 
-## List
+### List
 /list
 List all alerts current set up.
 
